@@ -39,17 +39,34 @@
   background-color: var(--color-primary-blue-300);
   font-weight: 700;
 }
-.text {
+.Step-container .text {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-.text .header {
+.Step-container .text .header {
   margin: 0;
   color: var(--color-neutral-grey-500);
 }
-.text .description {
+.Step-container .text .description {
   margin: 0;
   font-weight: 700;
   color: var(--color-neutral-blue-50);
+}
+@media (max-width: 800px) {
+  .steps {
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .Step-container {
+    margin: 10px;
+  }
+  .Step-container .text {
+    display: none;
+  }
+  .Bar-image {
+    border-radius: 0;
+  }
 }
