@@ -7,7 +7,7 @@ import "./Form.css";
 
 function Form({ step, setStep }) {
   // Form 1
-  const [inputs, setInputs] = useState([
+  const initialInputs = [
     {
       id: "name",
       label: "Name",
@@ -29,53 +29,55 @@ function Form({ step, setStep }) {
       value: "",
       error: "",
     },
-  ]);
+  ];
+  const [inputs, setInputs] = useState(initialInputs);
   const validateForm1 = () => {
     let valid = true;
 
-    setInputs((prev) =>
-      prev.map((input) => {
-        let error = "";
+    // compute nextInputs based on current state
+    const nextInputs = inputs.map((input) => {
+      let error = "";
 
-        if (input.id === "name") {
-          if (!input.value || input.value.trim() === "") {
-            error = "Name is required";
-            valid = false;
-          }
+      if (input.id === "name") {
+        if (!input.value || input.value.trim() === "") {
+          error = "Name is required";
+          valid = false;
         }
+      }
 
-        if (input.id === "email") {
-          if (!input.value || !/^\S+@\S+\.\S+$/.test(input.value)) {
-            error = "Invalid email";
-            valid = false;
-          }
+      if (input.id === "email") {
+        if (!input.value || !/^\S+@\S+\.\S+$/.test(input.value)) {
+          error = "Invalid email";
+          valid = false;
         }
+      }
 
-        if (input.id === "phone") {
-          if (!input.value || input.value.trim() === "") {
-            error = "Phone is required";
-            valid = false;
-          }
+      if (input.id === "phone") {
+        if (!input.value || input.value.trim() === "") {
+          error = "Phone is required";
+          valid = false;
         }
+      }
 
-        return { ...input, error };
-      })
-    );
+      return { ...input, error };
+    });
+
+    // now update state once
+    setInputs(nextInputs);
 
     return valid;
   };
-
   //Form 2
   const durations = ["Monthly", "Yearly"];
-  const [Plans, setPlans] = useState([
+  const initialPlans = [
     { title: "Arcade", price: 9, checked: true },
     { title: "Advanced", price: 12, checked: false },
     { title: "Pro", price: 15, checked: false },
-  ]);
+  ];
+  const [Plans, setPlans] = useState(initialPlans);
   const [duration, setDuration] = useState(durations[0]);
-
   //Form 3
-  const [addOns, setAddOns] = useState([
+  const initialAddOns = [
     {
       title: "Online service",
       description: "Access to multiplayer games",
@@ -94,8 +96,9 @@ function Form({ step, setStep }) {
       price: 2,
       checked: false,
     },
-  ]);
-
+  ];
+  const [addOns, setAddOns] = useState(initialAddOns);
+  //Forms List
   const Forms = [
     {
       title: "Personal info",
@@ -129,7 +132,14 @@ function Form({ step, setStep }) {
       title: "Finiching up",
       description: "Double-check everything looks OK before confirming.",
       component: {
-        component: <Form4 activePlan={activePlan} duration={duration}></Form4>,
+        component: (
+          <Form4
+            Plans={Plans}
+            duration={duration}
+            addOns={addOns}
+            setStep={setStep}
+          ></Form4>
+        ),
         validator: () => true,
       },
     },
@@ -138,6 +148,16 @@ function Form({ step, setStep }) {
   const handleNext = () => {
     const isValid = Forms[step - 1].validator();
     if (isValid) setStep(step + 1);
+  };
+
+  const handleBack = () => {
+    // reset state when going back
+    setInputs(initialInputs);
+    setPlans(initialPlans);
+    setDuration("Monthly");
+    setAddOns(initialAddOns);
+
+    setStep(step - 1);
   };
 
   return (
@@ -149,11 +169,11 @@ function Form({ step, setStep }) {
 
       <div className="buttons">
         <button className="nextButton" onClick={handleNext}>
-          Next Step
+          {step === 4 ? "Confirm" : "Next Step"}
         </button>
 
         {step > 1 && (
-          <button className="backButton" onClick={() => setStep(step - 1)}>
+          <button className="backButton" onClick={handleBack}>
             Go Back
           </button>
         )}
