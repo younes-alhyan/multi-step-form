@@ -1,167 +1,79 @@
 import { useState } from "react";
-import Input from "../utils/Input";
-import PlanCard from "../utils/PlanCard";
-import AddOn from "../utils/AddOn";
+import Form1 from "../utils/Form1";
+import Form2 from "../utils/Form2";
+import Form3 from "../utils/Form3";
+import Form4 from "../utils/Form4";
 import "./Form.css";
 
-function Form1({
-  name,
-  setName,
-  nameError,
-  setNameError,
-  email,
-  setEmail,
-  emailError,
-  setEmailError,
-  phone,
-  setPhone,
-  phoneError,
-  setPhoneError,
-}) {
-  const inputs = [
+function Form({ step, setStep }) {
+  // Form 1
+  const [inputs, setInputs] = useState([
     {
       id: "name",
       label: "Name",
       placeholder: "e.g. Stephen King",
-      value: name,
-      setValue: setName,
-      error: nameError,
-      setError: setNameError,
-      validator: (val) => val.trim() !== "",
-      errorMessage: "Name is required",
+      value: "",
+      error: "",
     },
     {
       id: "email",
       label: "Email Address",
       placeholder: "e.g. stephenking@lorem.com",
-      value: email,
-      setValue: setEmail,
-      error: emailError,
-      setError: setEmailError,
-      validator: (val) => /^\S+@\S+\.\S+$/.test(val),
-      errorMessage: "Invalid email",
+      value: "",
+      error: "",
     },
     {
       id: "phone",
       label: "Phone Number",
       placeholder: "e.g. +1 234 567 890",
-      value: phone,
-      setValue: setPhone,
-      error: phoneError,
-      setError: setPhoneError,
-      validator: (val) => val.trim() !== "",
-      errorMessage: "Phone is required",
+      value: "",
+      error: "",
     },
-  ];
-
-  return (
-    <div className="inputs">
-      {inputs.map((input) => (
-        <Input
-          key={input.id}
-          id={input.id}
-          label={input.label}
-          placeholder={input.placeholder}
-          value={input.value}
-          setValue={input.setValue}
-          error={input.error}
-        />
-      ))}
-    </div>
-  );
-}
-function Form2({ activePlan, setActivePlan, duration, setDuration, Plans }) {
-  const durations = ["Monthly", "Yearly"];
-  function handleToggle() {
-    const index = duration === durations[0] ? 1 : 0;
-    setDuration(durations[index]);
-  }
-  return (
-    <div className="plans">
-      <div className="cards">
-        {Plans.map((plan, index) => (
-          <PlanCard
-            key={plan.title}
-            index={index}
-            title={plan.title}
-            price={plan.price}
-            active={activePlan}
-            setActive={setActivePlan}
-            duration={duration}
-          />
-        ))}
-      </div>
-      <div className="toggle-div">
-        <p className={`duration ${duration === durations[0] ? "active" : ""}`}>
-          {durations[0]}
-        </p>
-        <div
-          className={`toggle-container ${
-            duration === durations[1] ? "active" : ""
-          }`}
-          onClick={handleToggle}
-        >
-          <span className="thumbnail"></span>
-        </div>
-        <p className={`duration ${duration === durations[1] ? "active" : ""}`}>
-          {durations[1]}
-        </p>
-      </div>
-    </div>
-  );
-}
-function Form3({ addOns, setAddOns, duration }) {
-  return (
-    <div className="add-ons">
-      {addOns.map((addOn, index) => (
-        <AddOn
-          key={index}
-          index={index}
-          addOn={addOn}
-          setAddOns={setAddOns}
-          duration={duration}
-        />
-      ))}
-    </div>
-  );
-}
-function Form({ step, setStep }) {
-  // Form 1
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-
+  ]);
   const validateForm1 = () => {
     let valid = true;
 
-    if (!name || name.trim() === "") {
-      setNameError("Name is required");
-      valid = false;
-    } else setNameError("");
+    setInputs((prev) =>
+      prev.map((input) => {
+        let error = "";
 
-    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-      setEmailError("Invalid email");
-      valid = false;
-    } else setEmailError("");
+        if (input.id === "name") {
+          if (!input.value || input.value.trim() === "") {
+            error = "Name is required";
+            valid = false;
+          }
+        }
 
-    if (!phone || phone.trim() === "") {
-      setPhoneError("Phone is required");
-      valid = false;
-    } else setPhoneError("");
+        if (input.id === "email") {
+          if (!input.value || !/^\S+@\S+\.\S+$/.test(input.value)) {
+            error = "Invalid email";
+            valid = false;
+          }
+        }
+
+        if (input.id === "phone") {
+          if (!input.value || input.value.trim() === "") {
+            error = "Phone is required";
+            valid = false;
+          }
+        }
+
+        return { ...input, error };
+      })
+    );
 
     return valid;
   };
+
   //Form 2
-  const [activePlan, setActivePlan] = useState("Arcade");
-  const [duration, setDuration] = useState("Monthly");
-  const Plans = [
-    { title: "Arcade", price: 9 },
-    { title: "Advanced", price: 12 },
-    { title: "Pro", price: 15 },
-  ];
+  const durations = ["Monthly", "Yearly"];
+  const [Plans, setPlans] = useState([
+    { title: "Arcade", price: 9, checked: true },
+    { title: "Advanced", price: 12, checked: false },
+    { title: "Pro", price: 15, checked: false },
+  ]);
+  const [duration, setDuration] = useState(durations[0]);
+
   //Form 3
   const [addOns, setAddOns] = useState([
     {
@@ -188,22 +100,7 @@ function Form({ step, setStep }) {
     {
       title: "Personal info",
       description: "Please provide your name, email address, and phone number.",
-      component: (
-        <Form1
-          name={name}
-          setName={setName}
-          nameError={nameError}
-          setNameError={setNameError}
-          email={email}
-          setEmail={setEmail}
-          emailError={emailError}
-          setEmailError={setEmailError}
-          phone={phone}
-          setPhone={setPhone}
-          phoneError={phoneError}
-          setPhoneError={setPhoneError}
-        />
-      ),
+      component: <Form1 inputs={inputs} setInputs={setInputs} />,
       validator: validateForm1,
     },
     {
@@ -211,11 +108,11 @@ function Form({ step, setStep }) {
       description: "You have the option of monthly or yearly billing.",
       component: (
         <Form2
-          activePlan={activePlan}
-          setActivePlan={setActivePlan}
+          Plans={Plans}
+          setPlans={setPlans}
+          durations={durations}
           duration={duration}
           setDuration={setDuration}
-          Plans={Plans}
         />
       ),
       validator: () => true,
@@ -227,6 +124,14 @@ function Form({ step, setStep }) {
         <Form3 addOns={addOns} setAddOns={setAddOns} duration={duration} />
       ),
       validator: () => true,
+    },
+    {
+      title: "Finiching up",
+      description: "Double-check everything looks OK before confirming.",
+      component: {
+        component: <Form4 activePlan={activePlan} duration={duration}></Form4>,
+        validator: () => true,
+      },
     },
   ];
 
