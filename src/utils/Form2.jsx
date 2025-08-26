@@ -1,6 +1,6 @@
 import PlanCard from "./PlanCard";
 
-function Form2({ Plans, setPlans, durations, duration, setDuration }) {
+function Form2({ plans, setPlans, durations, duration, setDuration }) {
   function handleToggle() {
     const index = duration === durations[0] ? 1 : 0;
     setDuration(durations[index]);
@@ -17,7 +17,7 @@ function Form2({ Plans, setPlans, durations, duration, setDuration }) {
   return (
     <div className="plans">
       <div className="cards">
-        {Plans.map((plan, index) => (
+        {plans.map((plan, index) => (
           <PlanCard
             key={plan.title}
             index={index}
