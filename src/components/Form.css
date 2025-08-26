@@ -11,16 +11,23 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;
-  margin: 16px;
+  margin: 32px 12px;
+  max-width: 720px;
 }
 .nextButton {
   border: none;
   background-color: var(--color-primary-blue-950);
   color: var(--color-neutral-white);
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 12px 32px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+}
+.nextButton.confirm {
+  background-color: var(--color-primary-purple-600);
+}
+.nextButton.confirm:hover {
+  opacity: 0.6;
 }
 .nextButton:hover {
   opacity: 0.8;
@@ -224,6 +231,85 @@ input.error {
   color: var(--color-primary-purple-600);
 }
 /*Form4*/
+.summary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+}
+.input-summary {
+  width: 100%;
+  margin: 32px 0;
+  padding: 24px;
+  border-radius: 15px;
+  background-color: var(--color-neutral-blue-50);
+}
+.plan-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid var(--color-neutral-grey-500);
+}
+.plan-summary .text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.plan-summary .text p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--color-primary-blue-950);
+}
+.plan-summary .text .change-plan {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-neutral-grey-500);
+  text-decoration: underline;
+  font-size: 18px;
+  width: fit-content;
+  cursor: pointer;
+  text-decoration-thickness: 2px;
+}
+.plan-summary .text .change-plan:hover {
+  color: var(--color-primary-purple-600);
+}
+.plan-summary .price {
+  color: var(--color-primary-blue-950);
+  font-weight: 700;
+}
+.add-ons-summary {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.add-on-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-on-summary .title,
+.total-summary .text {
+  color: var(--color-neutral-grey-500);
+}
+.add-on-summary .price {
+  color: var(--color-primary-blue-950);
+  margin: 10px 0;
+}
+.total-summary {
+  padding: 0 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-summary .total {
+  color: var(--color-primary-purple-600);
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
 
 /*media queries*/
 @media (max-width: 800px) {
@@ -256,7 +342,14 @@ input.error {
   .add-on .left {
     gap: 15px;
   }
-  .buttons{
+  .buttons {
     margin-top: 25px;
+  }
+  /*Form4*/
+  .input-summary {
+    padding: 24px 0;
+  }
+  .total-summary {
+    padding: 0 10px;
   }
 }
