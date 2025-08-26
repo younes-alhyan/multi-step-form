@@ -1,0 +1,7 @@
+.ThankYou h1 {
+  color: var(--color-primary-blue-950);
+}
+.ThankYou p {
+  color: var(--color-neutral-grey-500);
+  text-align: center;
+}
