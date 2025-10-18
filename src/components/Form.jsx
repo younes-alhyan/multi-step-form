@@ -1,0 +1,153 @@
+import { useState } from "react";
+import Input from "../utils/Input";
+import "./Form.css";
+
+function Form1({
+  name,
+  setName,
+  nameError,
+  setNameError,
+  email,
+  setEmail,
+  emailError,
+  setEmailError,
+  phone,
+  setPhone,
+  phoneError,
+  setPhoneError,
+}) {
+  const inputs = [
+    {
+      id: "name",
+      label: "Name",
+      placeholder: "e.g. Stephen King",
+      value: name,
+      setValue: setName,
+      error: nameError,
+      setError: setNameError,
+      validator: (val) => val.trim() !== "",
+      errorMessage: "Name is required",
+    },
+    {
+      id: "email",
+      label: "Email Address",
+      placeholder: "e.g. stephenking@lorem.com",
+      value: email,
+      setValue: setEmail,
+      error: emailError,
+      setError: setEmailError,
+      validator: (val) => /^\S+@\S+\.\S+$/.test(val),
+      errorMessage: "Invalid email",
+    },
+    {
+      id: "phone",
+      label: "Phone Number",
+      placeholder: "e.g. +1 234 567 890",
+      value: phone,
+      setValue: setPhone,
+      error: phoneError,
+      setError: setPhoneError,
+      validator: (val) => val.trim() !== "",
+      errorMessage: "Phone is required",
+    },
+  ];
+
+  return (
+    <div className="inputs">
+      {inputs.map((input) => (
+        <Input
+          key={input.id}
+          id={input.id}
+          label={input.label}
+          placeholder={input.placeholder}
+          value={input.value}
+          setValue={input.setValue}
+          error={input.error}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Form({ step, setStep }) {
+  // lift state here
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+  const validateForm1 = () => {
+    let valid = true;
+
+    if (!name || name.trim() === "") {
+      setNameError("Name is required");
+      valid = false;
+    } else setNameError("");
+
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setEmailError("Invalid email");
+      valid = false;
+    } else setEmailError("");
+
+    if (!phone || phone.trim() === "") {
+      setPhoneError("Phone is required");
+      valid = false;
+    } else setPhoneError("");
+
+    return valid;
+  };
+
+  const Forms = [
+    {
+      title: "Personal info",
+      description: "Please provide your name, email address, and phone number",
+      component: (
+        <Form1
+          name={name}
+          setName={setName}
+          nameError={nameError}
+          setNameError={setNameError}
+          email={email}
+          setEmail={setEmail}
+          emailError={emailError}
+          setEmailError={setEmailError}
+          phone={phone}
+          setPhone={setPhone}
+          phoneError={phoneError}
+          setPhoneError={setPhoneError}
+        />
+      ),
+      validator: validateForm1,
+    },
+  ];
+
+  const handleNext = () => {
+    const isValid = Forms[step - 1].validator();
+    if (isValid) setStep(step + 1);
+  };
+
+  return (
+    <div className="Form">
+      <h1 className="title">{Forms[step - 1].title}</h1>
+      <p className="description">{Forms[step - 1].description}</p>
+
+      {Forms[step - 1].component}
+
+      <div className="buttons">
+        <button className="nextButton" onClick={handleNext}>
+          Next Step
+        </button>
+
+        {step > 1 && (
+          <button className="backButton" onClick={() => setStep(step - 1)}>
+            Back
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Form;
