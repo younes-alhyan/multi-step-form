@@ -12,7 +12,7 @@ function ResponsiveImage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const src = width <= 375 ? mobileImg : desktopImg;
+  const src = width <= 800 ? mobileImg : desktopImg;
 
   return <img src={src} alt="Responsive" className="Bar-image"/>;
 }

@@ -4,9 +4,8 @@ body {
 .App {
   padding: 16px;
   height: 100vh;
-  background-color: var(--color-neutral-white);
+  background-color: var(--color-primary-blue-200);
   display: flex;
-  gap: 128px;
 }
 .Bar {
   flex: 1;
@@ -16,8 +15,44 @@ body {
   min-width: 300px;
 }
 .Form {
+  background-color: var(--color-neutral-white);
   flex: 3;
   display: flex;
   flex-direction: column;
   padding: 48px 24px;
+  padding-left: 128px;
+  border-radius: 10px;
+}
+
+@media (max-width: 1100px) {
+  .Form {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .App {
+    position: relative;
+    flex-direction: column;
+    padding: 0;
+  }
+  .Bar {
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    height: 33%;
+  }
+  .Form {
+    position: absolute;
+    width: 90%;
+    top: 224px;
+    left: 50%; /* move left edge to 50% of parent */
+    transform: translateX(-50%); /* shift back by 50% of its own width */
+    padding-left: 32px;
+    z-index: 1;
+  }
+}
+@media (max-width: 500px) {
+  .Form {
+    width: 100%;
+  }
 }
