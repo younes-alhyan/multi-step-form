@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Input from "../utils/Input";
+import PlanCard from "../utils/PlanCard";
+import AddOn from "../utils/AddOn";
 import "./Form.css";
 
 function Form1({
@@ -68,9 +70,63 @@ function Form1({
     </div>
   );
 }
-
+function Form2({ activePlan, setActivePlan, duration, setDuration, Plans }) {
+  const durations = ["Monthly", "Yearly"];
+  function handleToggle() {
+    const index = duration === durations[0] ? 1 : 0;
+    setDuration(durations[index]);
+  }
+  return (
+    <div className="plans">
+      <div className="cards">
+        {Plans.map((plan, index) => (
+          <PlanCard
+            key={plan.title}
+            index={index}
+            title={plan.title}
+            price={plan.price}
+            active={activePlan}
+            setActive={setActivePlan}
+            duration={duration}
+          />
+        ))}
+      </div>
+      <div className="toggle-div">
+        <p className={`duration ${duration === durations[0] ? "active" : ""}`}>
+          {durations[0]}
+        </p>
+        <div
+          className={`toggle-container ${
+            duration === durations[1] ? "active" : ""
+          }`}
+          onClick={handleToggle}
+        >
+          <span className="thumbnail"></span>
+        </div>
+        <p className={`duration ${duration === durations[1] ? "active" : ""}`}>
+          {durations[1]}
+        </p>
+      </div>
+    </div>
+  );
+}
+function Form3({ addOns, setAddOns, duration }) {
+  return (
+    <div className="add-ons">
+      {addOns.map((addOn, index) => (
+        <AddOn
+          key={index}
+          index={index}
+          addOn={addOn}
+          setAddOns={setAddOns}
+          duration={duration}
+        />
+      ))}
+    </div>
+  );
+}
 function Form({ step, setStep }) {
-  // lift state here
+  // Form 1
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [email, setEmail] = useState("");
@@ -98,11 +154,40 @@ function Form({ step, setStep }) {
 
     return valid;
   };
+  //Form 2
+  const [activePlan, setActivePlan] = useState("Arcade");
+  const [duration, setDuration] = useState("Monthly");
+  const Plans = [
+    { title: "Arcade", price: 9 },
+    { title: "Advanced", price: 12 },
+    { title: "Pro", price: 15 },
+  ];
+  //Form 3
+  const [addOns, setAddOns] = useState([
+    {
+      title: "Online service",
+      description: "Access to multiplayer games",
+      price: 1,
+      checked: false,
+    },
+    {
+      title: "Larger storage",
+      description: "Extra 1TB of cloud save",
+      price: 2,
+      checked: false,
+    },
+    {
+      title: "Customizable Profile",
+      description: "Custom theme on your profile",
+      price: 2,
+      checked: false,
+    },
+  ]);
 
   const Forms = [
     {
       title: "Personal info",
-      description: "Please provide your name, email address, and phone number",
+      description: "Please provide your name, email address, and phone number.",
       component: (
         <Form1
           name={name}
@@ -120,6 +205,28 @@ function Form({ step, setStep }) {
         />
       ),
       validator: validateForm1,
+    },
+    {
+      title: "Select your plan",
+      description: "You have the option of monthly or yearly billing.",
+      component: (
+        <Form2
+          activePlan={activePlan}
+          setActivePlan={setActivePlan}
+          duration={duration}
+          setDuration={setDuration}
+          Plans={Plans}
+        />
+      ),
+      validator: () => true,
+    },
+    {
+      title: "Pick add-ons",
+      description: "Add-ons help enhance yout gaming experience.",
+      component: (
+        <Form3 addOns={addOns} setAddOns={setAddOns} duration={duration} />
+      ),
+      validator: () => true,
     },
   ];
 
@@ -142,7 +249,7 @@ function Form({ step, setStep }) {
 
         {step > 1 && (
           <button className="backButton" onClick={() => setStep(step - 1)}>
-            Back
+            Go Back
           </button>
         )}
       </div>
