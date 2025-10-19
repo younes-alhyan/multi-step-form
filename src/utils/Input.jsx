@@ -3,11 +3,11 @@ function Input({ id, label, placeholder, setValue, error }) {
     <div className="input-container">
       <div className="top">
         <label htmlFor={id}>{label}</label>
-        <p className="input-error">{error}</p>
+        {error && <p className="input-error">{error}</p>}
       </div>
       <input
         type="text"
-        className="input"
+        className={`input ${error ? "error" : ""}`}
         id={id}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
