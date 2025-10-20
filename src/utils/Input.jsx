@@ -1,4 +1,4 @@
-function Input({ id, label, placeholder, setValue, error }) {
+function Input({ id, label, placeholder, value, setValue, error }) {
   return (
     <div className="input-container">
       <div className="top">
@@ -10,6 +10,7 @@ function Input({ id, label, placeholder, setValue, error }) {
         className={`input ${error ? "error" : ""}`}
         id={id}
         placeholder={placeholder}
+        value={value} 
         onChange={(e) => setValue(e.target.value)}
       />
     </div>
