@@ -8,7 +8,7 @@ function PlanCard({ index, title, price, active, setActive, duration }) {
   return (
     <div
       className={`plan-card ${title === active ? "active" : ""}`}
-      onClick={() => setActive(title)}
+      onClick={() => setActive({ title, price })}
     >
       <img src={icons[index]} alt={title} className="plan-icon" />
       <div className="content">
