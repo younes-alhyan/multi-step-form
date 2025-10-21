@@ -74,7 +74,7 @@ function Form({ step, setStep }) {
     { title: "Advanced", price: 12, checked: false },
     { title: "Pro", price: 15, checked: false },
   ];
-  const [Plans, setPlans] = useState(initialPlans);
+  const [plans, setPlans] = useState(initialPlans);
   const [duration, setDuration] = useState(durations[0]);
   //Form 3
   const initialAddOns = [
@@ -111,7 +111,7 @@ function Form({ step, setStep }) {
       description: "You have the option of monthly or yearly billing.",
       component: (
         <Form2
-          Plans={Plans}
+          plans={plans}
           setPlans={setPlans}
           durations={durations}
           duration={duration}
@@ -131,17 +131,16 @@ function Form({ step, setStep }) {
     {
       title: "Finiching up",
       description: "Double-check everything looks OK before confirming.",
-      component: {
-        component: (
-          <Form4
-            Plans={Plans}
-            duration={duration}
-            addOns={addOns}
-            setStep={setStep}
-          ></Form4>
-        ),
-        validator: () => true,
-      },
+      component: (
+        <Form4
+          plans={plans}
+          duration={duration}
+          durations={durations}
+          addOns={addOns}
+          setStep={setStep}
+        ></Form4>
+      ),
+      validator: () => true,
     },
   ];
 
@@ -168,7 +167,10 @@ function Form({ step, setStep }) {
       {Forms[step - 1].component}
 
       <div className="buttons">
-        <button className="nextButton" onClick={handleNext}>
+        <button
+          className={`nextButton ${step === 4 ? "confirm" : ""} `}
+          onClick={handleNext}
+        >
           {step === 4 ? "Confirm" : "Next Step"}
         </button>
 
