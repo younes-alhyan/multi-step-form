@@ -2,13 +2,13 @@ import ArcadeIcon from "../assets/icon-arcade.svg";
 import AdvancedIcon from "../assets/icon-advanced.svg";
 import ProIcon from "../assets/icon-pro.svg";
 
-function PlanCard({ index, title, price, active, setActive, duration }) {
+function PlanCard({ index, title, price, checked, setActive, duration }) {
   const icons = [ArcadeIcon, AdvancedIcon, ProIcon];
 
   return (
     <div
-      className={`plan-card ${title === active ? "active" : ""}`}
-      onClick={() => setActive({ title, price })}
+      className={`plan-card ${checked ? "active" : ""}`}
+      onClick={setActive}
     >
       <img src={icons[index]} alt={title} className="plan-icon" />
       <div className="content">
