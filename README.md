@@ -1,12 +1,29 @@
-# React + Vite
+# 📁 Multi-Step Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Hero Image](https://res.cloudinary.com/dz209s6jk/image/upload/Challenges/vxqbpnpbamodg5ioplbj.jpg)
 
-Currently, two official plugins are available:
+## 🌟 Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+An excellent test for your form-building and JS skills, this project will pose many challenges along the way to completion.
 
-## Expanding the ESLint configuration
+## 🏆 Challenge
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Frontend Mentor Challenge](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ)
+
+## 💡 Solution
+
+[Solution Link](https://www.frontendmentor.io/solutions/multistep-form-h5yneup1zc) 
+
+## 🚀 Live Demo
+
+[View Demo](https://younes-alhyan.github.io/multi-step-form)
+
+## 🔎 More
+
+[GitHub Repository](https://github.com/younes-alhyan/frontend-mentor/)
+
+## 🔥 Difficulty
+
+![ADVANCED](https://img.shields.io/badge/Difficulty-ADVANCED-orange)
+
+**Level:** 4 / 5
