@@ -1,4 +1,4 @@
-# 📁 Multi-Step Form
+# 📂 Multi-Step Form
 
 ![Hero Image](https://res.cloudinary.com/dz209s6jk/image/upload/Challenges/vxqbpnpbamodg5ioplbj.jpg)
 
