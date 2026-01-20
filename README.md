@@ -16,11 +16,11 @@ An excellent test for your form-building and JS skills, this project will pose m
 
 ## 🚀 Live Demo
 
-[View Demo](https://younes-alhyan.github.io/multi-step-form)
+[View Demo](https://younes-alhyan-frontend-mentor.github.io/multi-step-form)
 
 ## 🔎 More
 
-[GitHub Repository](https://github.com/younes-alhyan/frontend-mentor/)
+[GitHub Repository](https://github.com/younes-alhyan-frontend-mentor/frontend-mentor/)
 
 ## 🛠️ Tech Stack
 
@@ -35,8 +35,8 @@ An excellent test for your form-building and JS skills, this project will pose m
 
 ## 🏅 Level
 
-![gold star](https://younes-alhyan.github.io/frontend-mentor/assets/star-filled.svg)
-![gold star](https://younes-alhyan.github.io/frontend-mentor/assets/star-filled.svg)
-![gold star](https://younes-alhyan.github.io/frontend-mentor/assets/star-filled.svg)
-![gold star](https://younes-alhyan.github.io/frontend-mentor/assets/star-filled.svg)
-![empty star](https://younes-alhyan.github.io/frontend-mentor/assets/star-outline.svg)
+![gold star](https://younes-alhyan-frontend-mentor.github.io/frontend-mentor/assets/star-filled.svg)
+![gold star](https://younes-alhyan-frontend-mentor.github.io/frontend-mentor/assets/star-filled.svg)
+![gold star](https://younes-alhyan-frontend-mentor.github.io/frontend-mentor/assets/star-filled.svg)
+![gold star](https://younes-alhyan-frontend-mentor.github.io/frontend-mentor/assets/star-filled.svg)
+![empty star](https://younes-alhyan-frontend-mentor.github.io/frontend-mentor/assets/star-outline.svg)
